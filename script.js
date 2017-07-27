@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   function getJPic(){
     var request = $.ajax({
-            url: 'https://app2-gse00012260.apaas.us2.oraclecloud.com/api/getallpurchase',
+            url: 'https://app3-gse00012260.apaas.us2.oraclecloud.com/api/getallrefinance',
             type: 'GET',
             dataType: 'json'
         });

@@ -13,6 +13,7 @@ $(document).ready(function(){
             dataType: 'json'
           });
     request.done(function(response){
+      filterSearch(response, name)
       console.log(name)
       for (i = 0; i < response.length; i++) {
         if (response[i].company == name){
@@ -58,16 +59,10 @@ $(document).ready(function(){
             url: 'https://app3-gse00012260.apaas.us2.oraclecloud.com/api/getallpurchase',
             type: 'GET',
             dataType: 'json',
-            dataFilter : function(response,type){
-              //if not JSON, don't do anything with it
-              if(type !== 'json') return response;
-              //otherwise, replace and return
-              return response.replace('while(1);','');
-            }
           });
 
     request.done(function(response){
-      
+
       console.log(response[0]);
       for (i = 0; i < response.length; i++) {
         var rowId = i+1
@@ -81,4 +76,21 @@ $(document).ready(function(){
     request.fail(function(error){
       console.log('There was an error: ',error);
     });
+  }
+
+  function filterSearch(response, name){
+    $.each(response, function(index){
+      var addLine = response[index].companyName
+      // console.log(addLine)
+      if (addLine == name) {
+        console.log("It worked")
+        var rowId = index+1
+        var originationMortgagee = response[index].companyName
+        var propertyType = response[index].propertyType
+        var totalResult = response[index].amount
+        var newline = "<tr><th scope='row'>"+rowId+"</th><td>"+originationMortgagee+"</td><td>"+propertyType+"</td><td>"+totalResult+"</td></tr>"
+        $("#purchase > tbody").append(newline);
+      }
+    })
+
   }

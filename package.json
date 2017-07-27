@@ -1,0 +1,15 @@
+{
+   "name":"FHA-frontend",
+   "version":"0.0.0",
+   "description":"FHA Frontend",
+   "author":"kollin.brandendburg@oracle.com",
+   "scripts":{
+      "prepublish":"zip -r manifest.json *.js"
+   },
+   "dependencies":{
+      "express":"^4.13.4"
+   },
+   "engines":{
+      "node":">=0.12.0"
+   }
+}

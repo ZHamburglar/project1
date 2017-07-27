@@ -15,17 +15,6 @@ $(document).ready(function(){
     request.done(function(response){
       filterSearch(response, name)
       console.log(name)
-      for (i = 0; i < response.length; i++) {
-        if (response[i].company == name){
-          console.log(response[i].companyName)
-          var rowId = i+1
-          var originationMortgagee = response[i].companyName
-          var propertyType = response[i].propertyType
-          var totalResult = response[i].amount
-          var newline = "<tr><th scope='row'>"+rowId+"</th><td>"+originationMortgagee+"</td><td>"+propertyType+"</td><td>"+totalResult+"</td></tr>"
-          $("#purchase > tbody").append(newline);
-        }
-      }
     });
     request.fail(function(error){
       console.log('There was an error: ',error);
@@ -33,6 +22,8 @@ $(document).ready(function(){
   }
 
   function getJPic(){
+    $("#purchase > tbody").empty()
+
     var request = $.ajax({
             url: 'https://app3-gse00012260.apaas.us2.oraclecloud.com/api/getallrefinance',
             type: 'GET',
@@ -55,6 +46,8 @@ $(document).ready(function(){
   }
 
   function getPurchases(){
+    $("#purchase > tbody").empty()
+
     var request = $.ajax({
             url: 'https://app3-gse00012260.apaas.us2.oraclecloud.com/api/getallpurchase',
             type: 'GET',
@@ -79,10 +72,11 @@ $(document).ready(function(){
   }
 
   function filterSearch(response, name){
+    $("#purchase > tbody").empty()
     $.each(response, function(index){
       var addLine = response[index].companyName
       // console.log(addLine)
-      if (addLine == name) {
+      if (addLine.includes(name)) {
         console.log("It worked")
         var rowId = index+1
         var originationMortgagee = response[index].companyName

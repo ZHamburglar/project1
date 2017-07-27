@@ -10,14 +10,11 @@ $(document).ready(function(){
         });
     request.done(function(response){
       console.log(response[0]);
-      console.log(response[0].id)
-      console.log(response.length)
       for (i = 0; i < response.length; i++) {
         var rowId = response[i].id
-        var originationMortgagee = response[i].origination_mortgagee
-        var propertyType = response[i].Property_Type
-        var totalResult = response[i].Original_Mortgage_Amount
-        var downPaymentSource = response[i].Down_Pay_Source
+        var originationMortgagee = response[i].companyName
+        var propertyType = response[i].propertyType
+        var totalResult = response[i].amount
         var newline = "<tr><th scope='row'>"+rowId+"</th><td>"+originationMortgagee+"</td><td>"+propertyType+"</td><td>"+totalResult+"</td></tr>"
         $("#purchase > tbody").append(newline);
       }
